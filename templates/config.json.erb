@@ -1,0 +1,34 @@
+{
+  "Clusters" :[
+   <%- @clusters.keys.each_with_index do |cluster, i|  -%>
+      {
+        "Name" :  <%= "\"#{cluster}\"," %>
+        <%- @clusters[cluster].keys.each do |cluster_attr| -%>
+        <%= "\"#{cluster_attr}\": #{@clusters[cluster][cluster_attr]}" %>
+      } <%= ',' if i < (@clusters.keys.size - 1) %>
+
+      <%- end -%>
+   <%- end -%>
+  ],
+
+  "Sentinels" : [
+   <%- @sentinels.keys.each_with_index do |sentinel, i|  -%>
+   {
+        <%- @sentinels[sentinel].keys.each_with_index do |sentinel_attr, j| -%>
+          <%- if sentinel_attr == 'Host'  -%>
+            <%= "\"#{sentinel_attr}\": \"#{@sentinels[sentinel][sentinel_attr]}\"" %><%= ',' if j < (@sentinels[sentinel].keys.size - 1) %>
+          <%- else -%>
+            <%= "\"#{sentinel_attr}\": #{@sentinels[sentinel][sentinel_attr]}" %><%= ',' if j < (@sentinels[sentinel].keys.size - 1) %>
+          <%- end -%>
+      <%- end -%>
+   } <%= ',' if i < (@sentinels.keys.size - 1) %>
+   <%- end -%>
+  ],
+
+  "HAProxy" :
+    {
+      "TemplatePath": "/etc/redishappy-haproxy/haproxy_template.cfg",
+      "OutputPath": "/etc/haproxy/haproxy_sensu.cfg",
+      "ReloadCommand": "haproxy -f /etc/haproxy/haproxy_sensu.cfg -p /var/run/haproxy_sensu.pid -sf $(cat /var/run/haproxy_sensu.pid)"
+    }
+}
