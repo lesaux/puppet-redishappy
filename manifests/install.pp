@@ -4,17 +4,18 @@ class redishappy::install {
     ensure_packages( 'haproxy' )
     package {'redishappy-haproxy':
       ensure   => present,
-    } else {
+    }
+  } else {
     package {'redishappy-haproxy':
       ensure   => absent,
     }
-   
   }
 
   if $redishappy::consul {
     package {'redishappy-consul':
       ensure   => present,
-    } else {
+    }
+  } else {
     package {'redishappy-consul':
       ensure   => absent,
     }

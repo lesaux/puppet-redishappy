@@ -27,8 +27,8 @@
 
   "HAProxy" :
     {
-      "TemplatePath": "<%= @template_path %>",
-      "OutputPath": "<%= @output_path %>",
-      "ReloadCommand": "<%= @reload_command %>"
+      "TemplatePath": "<%= scope['::redishappy::template_path'] %>",
+      "OutputPath": "<%= scope['::redishappy::output_path'] %>",
+      "ReloadCommand": "<%= scope['::redishappy::params::reload_command'] %>"
     }
 }
