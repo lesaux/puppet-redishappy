@@ -9,30 +9,20 @@ case $::osfamily {
      $haproxy_service = 'redishappy-haproxy-service'
      $consul_service  = 'redishappy-consul-service'
    }
-   default: {
-     # ...
-   }
 }
 
   if $redishappy::haproxy {
     service {"$haproxy_service":
-      ensure   => enabled,
-    }
-  } else {
-    service {"$haproxy_service":
-      ensure   => disabled,
+      ensure   => running,
+      enable   => true,
     }
   }
 
   if $redishappy::consul {
     service {"$consul_service":
-      ensure   => enabled,
-    }
-  } else {
-    package {"$consul_service":
-      ensure   => disabled,
+      ensure   => running,
+      enable   => true,
     }
   }
 
 }
-
