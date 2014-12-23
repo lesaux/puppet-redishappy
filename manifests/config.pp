@@ -5,10 +5,12 @@ class redishappy::config {
     file { '/etc/redishappy-haproxy/config.json':
       ensure  => present,
       content => template('redishappy/config.json.erb'),
+      notify  => service("$::redishappy::service::haproxy-service"),
     }
     file { "$::redishappy::params::template_path":
       ensure  => present,
       content => template('redishappy/haproxy_template.cfg.erb'),
+      notify  => service("$::redishappy::service::haproxy-service"),
     }
     file { "$::redishappy::output_path":
       ensure  => present,

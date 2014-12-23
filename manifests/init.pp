@@ -18,7 +18,7 @@ class redishappy (
   class{'redishappy::params': } ->
   class{'redishappy::repo': } ->
   class{'redishappy::install': } ->
-  class{'redishappy::config': }
-  #class{'redishappy::service': }
+  class{'redishappy::config': } ->
+  class{'redishappy::service': }
 
 }
