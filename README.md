@@ -7,6 +7,8 @@ Only haproxy support atm.
 
 redishappy-haproxy seems to only support one cluster of sentinels atm. You'll need to have all of your monitors in one single sentinel.
 
+I removed installation of the haproxy package. It should probably be managed by another module.
+
 example usage:
 
 ```
