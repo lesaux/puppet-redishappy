@@ -14,6 +14,11 @@ defaults
  timeout server 60s
  option tcpka
 
+listen admin
+  bind *:8081
+  mode  http
+  stats  enable
+
 {{range .Clusters}}
 ## start cluster {{ .Name }}
 frontend ft_{{ .Name }}
