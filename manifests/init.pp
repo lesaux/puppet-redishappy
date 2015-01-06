@@ -1,7 +1,6 @@
 class redishappy (
 
   $haproxy          = false,
-  $haproxy_install  = false,
   $consul           = false, #support not implemented yet
   $clusters         = $redishappy::params::clusters,
   $sentinels        = $redishappy::params::sentinels,
