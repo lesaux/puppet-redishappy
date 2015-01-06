@@ -1,9 +1,11 @@
 class redishappy::install {
 
   if $redishappy::haproxy {
-    ensure_packages( 'haproxy' )
     package {'redishappy-haproxy':
       ensure   => present,
+    }
+    if $redishappy::haproxy_install {
+      ensure_packages( 'haproxy' )
     }
   } else {
     package {'redishappy-haproxy':
