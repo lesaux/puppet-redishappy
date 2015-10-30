@@ -13,15 +13,15 @@ case $::osfamily {
 
   if $redishappy::haproxy {
     service {"$haproxy_service":
-      ensure   => running,
-      enable   => true,
+      ensure   => $redishappy::service_ensure,
+      enable   => $redishappy::service_enable,
     }
   }
 
   if $redishappy::consul {
     service {"$consul_service":
-      ensure   => running,
-      enable   => true,
+      ensure   => $redishappy::service_ensure,
+      enable   => $redishappy::service_enable,
     }
   }
 

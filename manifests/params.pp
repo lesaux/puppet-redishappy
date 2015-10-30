@@ -9,6 +9,9 @@ class redishappy::params {
   $template_path      = '/etc/redishappy-haproxy/haproxy_template.cfg'
   $output_path        = '/etc/haproxy/haproxy-redishappy.cfg'
   $reload_command     = "$::redishappy::haproxy_binary -f $::redishappy::output_path -p $::redishappy::haproxy_pidfile -sf $(cat $::redishappy::haproxy_pidfile)"
+  
+  $service_ensure     = true
+  $service_enable     = true
 
   $clusters        = {
     'cluster1' => {
