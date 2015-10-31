@@ -9,6 +9,8 @@ class redishappy (
   $template_path       = $redishappy::params::template_path,
   $output_path         = $redishappy::params::output_path,
   $consul_config       = {},
+  $haproxy_service     = $redishappy::params::haproxy_service,
+  $consul_service      = $redishappy::params::consul_service,
   $service_ensure      = $redishappy::params::service_ensure,
   $service_enable      = $redishappy::params::service_enable,
   $use_developers_repo = false,

@@ -92,3 +92,19 @@ example usage for consul (currently supports a single service):
 
   }
   ```
+
+In CentOS 7, there may be issues with the service init script, which is contained in the redishappy-consul rpm. More specifically, the init script will hang when attempting to start the service. If you come across this issue, a way to quickly overcome it will be to use systemd instead, for example adding a service file under /etc/systemd/system/ with the following contents:
+
+```
+[Unit]
+Description=Daemon for redishappy-consul
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/redis-consul -config /etc/redishappy-consul/config.json -log /var/log/redishappy-consul
+
+[Install]
+WantedBy=multi-user.target
+```
+
+You can add a file resource eg. within your profile (notifying the redishappy::service class would also be a good idea) and then simply pass that service name as the value to the consul_service variable of the redishappy module main class.
