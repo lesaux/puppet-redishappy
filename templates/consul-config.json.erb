@@ -1,0 +1,45 @@
+{
+  "Clusters" :[
+   <%- @clusters.keys.each_with_index do |cluster, i|  -%>
+      {
+        "Name" :  <%= "\"#{cluster}\"," %>
+        <%- @clusters[cluster].keys.each do |cluster_attr| -%>
+        <%= "\"#{cluster_attr}\": #{@clusters[cluster][cluster_attr]}" %>
+      } <%= ',' if i < (@clusters.keys.size - 1) %>
+
+      <%- end -%>
+   <%- end -%>
+  ],
+
+  "Sentinels" : [
+   <%- @sentinels.keys.each_with_index do |sentinel, i|  -%>
+   {
+        <%- @sentinels[sentinel].keys.each_with_index do |sentinel_attr, j| -%>
+          <%- if sentinel_attr == 'Host'  -%>
+            <%= "\"#{sentinel_attr}\": \"#{@sentinels[sentinel][sentinel_attr]}\"" %><%= ',' if j < (@sentinels[sentinel].keys.size - 1) %>
+          <%- else -%>
+            <%= "\"#{sentinel_attr}\": #{@sentinels[sentinel][sentinel_attr]}" %><%= ',' if j < (@sentinels[sentinel].keys.size - 1) %>
+          <%- end -%>
+      <%- end -%>
+   } <%= ',' if i < (@sentinels.keys.size - 1) %>
+   <%- end -%>
+  ],
+
+  "Consul" : {
+
+    "Address" : "<%= @consul_config['Address'] %>",
+  
+    "Services" : [
+      {
+         
+          "Cluster" : "<%= @consul_config['Services']['Cluster'] %>",
+
+          "Node" : "<%= @consul_config['Services']['Node'] %>",
+          
+          "Datacenter": "<%= @consul_config['Services']['Datacenter'] %>",
+
+          "tags" : [ <%= @consul_config['Services']['tags'] %> ]
+        }
+    ]
+  }
+}
